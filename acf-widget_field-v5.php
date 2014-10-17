@@ -108,6 +108,7 @@ class acf_field_widget_field extends acf_field
 
         switch ($widget_instance['classname']) {
         case 'widget_text':
+        case 'widget_nav_menu':
             $settings = $widget_instance['callback'][0]->get_settings();
             if (!isset($settings[$widget_instance['params'][0]['number']]['title'])) {
                 return $widget_instance['name'];
