@@ -142,22 +142,23 @@ class acf_field_widget_field extends acf_field
             }
         }
 
-        $presentation = (isset($current_sidebar)) ? $wp_registered_sidebars[$current_sidebar] : array(
-            'name' => '', 
-            'id' => '',
-            'description' => '',
-            'class' => '',
-            'before_widget'=> '',
-            'after_widget'=> '',
-            'before_title'=> '',
-            'after_title' => ''
-        );
-
-        // Clear formatting unless required
-        if (!$format) { 
-            $presentation['before_widget'] = '';
-            $presentation['after_widget'] = '';
+        if (isset($current_sidebar) && !is_null($wp_registered_sidebars[$current_sidebar])) {
+            $presentation = $wp_registered_sidebars[$current_sidebar];
+        } else {
+            $presentation = array(
+                'name' => '', 
+                'id' => '',
+                'description' => '',
+                'class' => '',
+                'before_widget'=> '',
+                'after_widget'=> '',
+                'before_title'=> '<h4 class="widgettitle">',
+                'after_title' => '</h4>'
+            );
         }
+
+        $presentation['before_widget'] = '';
+        $presentation['after_widget'] = '';
 
         $params = array_merge(
             array(array_merge($presentation, array('widget_id' => $widget_id, 'widget_name' => $wp_registered_widgets[$widget_id]['name']))),
